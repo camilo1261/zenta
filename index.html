@@ -194,19 +194,28 @@
   }
 
   /* ---------- ZOSER CHAT WIDGET ---------- */
-  .zoser-fab{
+  .zoser-launcher{
     position:fixed;right:24px;bottom:24px;z-index:100;
-    display:flex;align-items:center;gap:10px;
-    background:var(--signal);color:#FFFFFF;border:none;cursor:pointer;
-    padding:10px 20px 10px 10px;font-family:var(--mono);font-size:13px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.35);
-    transition:transform .2s,background .2s;
+    display:flex;flex-direction:column;align-items:flex-end;gap:10px;
   }
-  .zoser-fab img{width:34px;height:34px;border-radius:50%;background:#fff;object-fit:cover;display:block;}
-  .zoser-fab:hover{transform:translateY(-2px);background:#c94a26;}
-  .zoser-fab .dot{width:8px;height:8px;border-radius:50%;background:#FFFFFF;animation:zoser-pulse 1.8s ease-in-out infinite;}
+  .zoser-bubble{
+    width:64px;height:64px;border-radius:50%;
+    border:none;padding:0;cursor:pointer;overflow:hidden;
+    background:var(--signal);
+    box-shadow:0 6px 20px rgba(0,0,0,0.4);
+    transition:transform .2s;
+  }
+  .zoser-bubble:hover{transform:translateY(-2px) scale(1.03);}
+  .zoser-bubble img{width:100%;height:100%;object-fit:cover;display:block;}
+  .zoser-tag{
+    background:var(--signal);color:#FFFFFF;border:none;cursor:pointer;
+    padding:9px 16px;font-family:var(--mono);font-size:12.5px;
+    display:flex;align-items:center;gap:8px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.35);
+  }
+  .zoser-tag .dot{width:7px;height:7px;border-radius:50%;background:#FFFFFF;animation:zoser-pulse 1.8s ease-in-out infinite;}
   @keyframes zoser-pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
-  .zoser-fab.hidden{display:none;}
+  .zoser-launcher.hidden{display:none;}
 
   .zoser-panel{
     position:fixed;right:24px;bottom:24px;z-index:100;
@@ -259,7 +268,7 @@
     font-family:var(--mono);font-size:12px;
   }
   .zoser-input-row button:hover{background:var(--signal);}
-  @media (max-width:480px){.zoser-panel{right:16px;bottom:16px;} .zoser-fab{right:16px;bottom:16px;}}
+  @media (max-width:480px){.zoser-panel{right:16px;bottom:16px;} .zoser-launcher{right:16px;bottom:16px;}}
 </style>
 </head>
 <body>
@@ -485,10 +494,15 @@
 </footer>
 
 <!-- ZOSER — asistente de ayuda -->
-<button class="zoser-fab" id="zoserFab" aria-label="Abrir ayuda">
-  <img src="assets/zoser-avatar-face.png" alt="Zoser">
-  ¿Necesitas ayuda?
-</button>
+<div class="zoser-launcher" id="zoserLauncher">
+  <button class="zoser-bubble" id="zoserFab" aria-label="Abrir ayuda">
+    <img src="assets/zoser-avatar-face.png" alt="Zoser">
+  </button>
+  <button class="zoser-tag" id="zoserFabTag" aria-label="Abrir ayuda">
+    <span class="dot"></span>
+    ¿Necesitas ayuda?
+  </button>
+</div>
 
 <div class="zoser-panel" id="zoserPanel">
   <div class="zoser-head">
@@ -522,6 +536,8 @@
 <script>
 (function(){
   var fab = document.getElementById('zoserFab');
+  var fabTag = document.getElementById('zoserFabTag');
+  var launcher = document.getElementById('zoserLauncher');
   var panel = document.getElementById('zoserPanel');
   var closeBtn = document.getElementById('zoserClose');
   var body = document.getElementById('zoserBody');
@@ -542,12 +558,12 @@
 
   function openPanel(){
     panel.classList.add('open');
-    fab.classList.add('hidden');
+    launcher.classList.add('hidden');
     input.focus();
   }
   function closePanel(){
     panel.classList.remove('open');
-    fab.classList.remove('hidden');
+    launcher.classList.remove('hidden');
   }
 
   function addMsg(text, who){
@@ -580,6 +596,7 @@
   }
 
   fab.addEventListener('click', openPanel);
+  fabTag.addEventListener('click', openPanel);
   closeBtn.addEventListener('click', closePanel);
   sendBtn.addEventListener('click', function(){ handleUserText(input.value); });
   input.addEventListener('keydown', function(e){
