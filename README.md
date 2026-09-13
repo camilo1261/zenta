@@ -2,9 +2,11 @@
 
 **[Ver sitio en vivo →](#)** *(reemplaza este link cuando publiques con GitHub Pages, ver instrucciones abajo)*
 
-Zenta es un proyecto propio de Business Intelligence aplicado a dos frentes: **dashboards para empresas** y **análisis estadístico de fútbol**. Nace de mi experiencia construyendo indicadores, automatizando reportes y depurando datos en entornos financieros y operativos, llevada a un formato de producto que cualquier persona —no solo un analista— pueda entender en segundos.
+Soy Administrador de Empresas con Especialización en Business Intelligence, con más de 4 años de experiencia construyendo indicadores, automatizando reportes y depurando datos en entornos financieros y operativos.
 
-Este repositorio contiene el sitio web del proyecto: la carta de presentación de Zenta, con dashboards de muestra que ilustran cómo se ve el análisis en la práctica.
+Actualmente trabajo como Analista de Operaciones, donde desarrollo dashboards ejecutivos en Power BI, automatizo procesos con Python y gestiono la calidad y trazabilidad de la información que soporta decisiones de negocio.
+
+Zenta es donde muestro cómo trabajo: no con más datos, sino con los correctos, presentados de forma que se entiendan en segundos.
 
 ## Qué muestra este proyecto
 
